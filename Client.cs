@@ -22,19 +22,17 @@ public class Client
             // 1. connect
             client.Connect("127.0.0.1", PORT_NUMBER);
             Stream stream = client.GetStream();
-
             Console.WriteLine("Connected to Server...");
             while (true)
             {
-                Console.Write("Enter your number(0-9): ");
-
-                string str = Console.ReadLine();
                 var reader = new StreamReader(stream);
                 var writer = new StreamWriter(stream);
                 writer.AutoFlush = true;
-
+                Console.WriteLine("Please enter number 0-10:");
                 // 2. send
+                String str = Console.ReadLine();
                 writer.WriteLine(str);
+                writer.AutoFlush = true;
 
                 // 3. receive
                 str = reader.ReadLine();
@@ -49,6 +47,10 @@ public class Client
 
         catch (Exception ex)
         {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(";Disconnect At: " + DateTime.Now + ";" + "Reason: Closed By Server\n");
+            File.AppendAllText("D://Access.log", sb.ToString());
+            sb.Clear();
             Console.WriteLine("Error: " + ex);
         }
 
