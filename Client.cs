@@ -28,7 +28,8 @@ public class Client
                 var reader = new StreamReader(stream);
                 var writer = new StreamWriter(stream);
                 writer.AutoFlush = true;
-                Console.WriteLine("Please enter number 0-10:");
+                Console.WriteLine("Please enter number 0-10/ dig[domain.com] / curl[domain.com/myfile.htm] :");
+
                 // 2. send
                 String str = Console.ReadLine();
                 writer.WriteLine(str);
